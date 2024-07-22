@@ -64,7 +64,7 @@ const SingleRow: React.FC<SingleRowProps> = ({ group }) => {
     const startX = e.pageX;
     const startWidth = columnWidths[column];
 
-    const onMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+    const onMouseMove = (e: any) => {
       const newWidth = startWidth + (e.pageX - startX);
       setColumnWidths((prevWidths) => ({
         ...prevWidths,

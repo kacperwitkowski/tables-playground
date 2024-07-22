@@ -21,9 +21,8 @@ function App() {
   };
 
   const groupedPeople = [];
-
-  for (let i = 0; i < people.length; i += 2) {
-    groupedPeople.push(people.slice(i, i + 2));
+  for (let i = 0; i < people.length; i += 5) {
+    groupedPeople.push(people.slice(i, i + 5));
   }
 
   return (
