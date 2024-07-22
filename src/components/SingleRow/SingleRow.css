@@ -1,0 +1,31 @@
+.table_group {
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.connected_table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 600px;
+}
+
+.connected_table th,
+.connected_table td {
+  padding: 8px;
+  text-align: left;
+  border: 1px solid black;
+}
+
+.connected_table th {
+  position: relative;
+}
+
+.resize-handle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 5px;
+  height: 100%;
+  cursor: ew-resize;
+  background: rgba(0, 0, 0, 0.2);
+}

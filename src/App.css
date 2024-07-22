@@ -1,0 +1,5 @@
+.table_container {
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+}
