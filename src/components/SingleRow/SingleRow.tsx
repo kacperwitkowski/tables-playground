@@ -1,6 +1,5 @@
 import React, { useState, MouseEvent } from "react";
-import { Popup } from "../Popup/Popup";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import "./SingleRow.css";
 
 interface PeopleProps {
@@ -16,19 +15,19 @@ interface SingleRowProps {
 
 const SingleRow: React.FC<SingleRowProps> = ({ group }) => {
   const [selectedRowIndices, setSelectedRowIndices] = useState<number[]>([]);
-  const [popupVisible, setPopupVisible] = useState<boolean>(false);
-  const [films, setFilms] = useState<string[]>([]);
   const [columnWidths, setColumnWidths] = useState<{
     name: number;
     height: number;
     skinColor: number;
     details: number;
   }>({
-    name: 100,
+    name: 150,
     height: 100,
     skinColor: 100,
     details: 100,
   });
+
+  const navigate = useNavigate();
 
   const handleRowClick = (index: number) => {
     setSelectedRowIndices((prevIndices) => {
@@ -40,20 +39,8 @@ const SingleRow: React.FC<SingleRowProps> = ({ group }) => {
     });
   };
 
-  const showDetails = async (filmsUrl: string[]) => {
-    try {
-      const filmPromises = filmsUrl.map((url) => axios.get(url));
-      const filmResponses = await Promise.all(filmPromises);
-      const filmTitles = filmResponses.map((response) => response.data.title);
-      setFilms(filmTitles);
-      setPopupVisible(true);
-    } catch (err) {
-      console.error("Failed to fetch film details", err);
-    }
-  };
-
-  const closePopup = () => {
-    setPopupVisible(false);
+  const showDetails = (person: PeopleProps) => {
+    navigate("/details", { state: { person } });
   };
 
   const handleMouseDown = (
@@ -135,15 +122,12 @@ const SingleRow: React.FC<SingleRowProps> = ({ group }) => {
                 {person.skin_color || ""}
               </td>
               <td style={{ width: columnWidths.details }}>
-                <button onClick={() => showDetails(person.films)}>
-                  Details
-                </button>
+                <button onClick={() => showDetails(person)}>Details</button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      {popupVisible && <Popup closePopup={closePopup} films={films} />}
     </div>
   );
 };

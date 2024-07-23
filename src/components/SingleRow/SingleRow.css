@@ -1,8 +1,3 @@
-.table_group {
-  margin-bottom: 10px;
-  width: 100%;
-}
-
 .connected_table {
   border-collapse: collapse;
   width: 100%;
@@ -28,4 +23,23 @@
   height: 100%;
   cursor: ew-resize;
   background: rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+  .connected_table th,
+  .connected_table td {
+    padding: 4px;
+    font-size: 12px;
+  }
+
+  .connected_table th .resize-handle {
+    width: 3px;
+  }
+
+  .connected_table th,
+  .connected_table td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }

@@ -2,9 +2,18 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
 import SingleRow from "./components/SingleRow/SingleRow";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import DetailsPage from "./pages/DetailsPage";
+
+interface Person {
+  name: string;
+  height: string;
+  skin_color: string;
+  films: string[];
+}
 
 function App() {
-  const [people, setPeople] = useState([]);
+  const [people, setPeople] = useState<Person[]>([]);
   const fetchLink = "https://swapi.dev/api/people/";
 
   useEffect(() => {
@@ -27,9 +36,17 @@ function App() {
 
   return (
     <div className="table_container">
-      {groupedPeople.map((group, index) => (
-        <SingleRow key={index} group={group} />
-      ))}
+      <Router>
+        <Routes>
+          <Route
+            path="/"
+            element={groupedPeople.map((group, index) => (
+              <SingleRow key={index} group={group} />
+            ))}
+          />
+          <Route path="/details" element={<DetailsPage />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
